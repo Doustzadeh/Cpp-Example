@@ -27,7 +27,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 int uimain(std::function<int()> run)
 {
-
     sciter::archive::instance().open(aux::elements_of(resources)); // bind resources[] (defined in "resources.cpp") with the archive
 
     sciter::om::hasset<frame> pwin = new frame();
