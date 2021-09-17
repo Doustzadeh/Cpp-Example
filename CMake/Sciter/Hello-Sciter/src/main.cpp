@@ -9,8 +9,9 @@ public:
 
     // passport - lists native functions and properties exposed to script under 'frame' interface name:
     SOM_PASSPORT_BEGIN(frame)
-    SOM_FUNCS(
-        SOM_FUNC(nativeMessage))
+        SOM_FUNCS(
+            SOM_FUNC(nativeMessage)
+        )
     SOM_PASSPORT_END
 
     // function expsed to script:
@@ -33,7 +34,7 @@ int uimain(std::function<int()> run)
 
     // note: this:://app URL is dedicated to the sciter::archive content associated with the application
     pwin->load(WSTR("this://app/main.htm"));
-    //or use this to load UI from
+    // or use this to load UI from
     //  pwin->load( WSTR("file:///home/andrew/Desktop/Project/res/main.htm") );
 
     pwin->expand();
