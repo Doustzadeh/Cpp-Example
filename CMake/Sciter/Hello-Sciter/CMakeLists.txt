@@ -42,6 +42,7 @@ if(WIN32)
                     -v "resources")
 endif()
 
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     # Do something only for debug builds
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/debug)
@@ -51,5 +52,6 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/release)
     file(COPY ${SCITER_SDK}/bin/windows/x32/sciter.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/)
 endif ()
+
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
