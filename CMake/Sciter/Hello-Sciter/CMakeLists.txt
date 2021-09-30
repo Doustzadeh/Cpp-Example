@@ -6,11 +6,9 @@ project(Hello-Sciter)
 set(SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 set(SCITER_SDK "C:/sciter-js-sdk")
-set(MINGW_HOME "C:/Program Files (x86)/CodeBlocks/MinGW")
+set(MINGW_HOME "C:/mingw32")
 
 include_directories("${SCITER_SDK}/include")
-include_directories("${MINGW_HOME}/opt/include")
-
 
 link_directories("${MINGW_HOME}/i686-w64-mingw32/lib")
 set(LIB_FILES ole32)
@@ -42,15 +40,22 @@ if(WIN32)
 endif()
 
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # Do something only for debug builds
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/debug)
     file(COPY ${SCITER_SDK}/bin/windows/x32/sciter.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}/)
-elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Do something only for release builds
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/release)
     file(COPY ${SCITER_SDK}/bin/windows/x32/sciter.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/)
-endif ()
+endif()
 
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    # if set WIN32 or WIN64 -> disabled console log -> std::out not working
+    add_executable(${CMAKE_PROJECT_NAME} WIN32 ${SOURCE_FILES})
+else()
+    add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+endif()
+
+target_link_libraries(${CMAKE_PROJECT_NAME} ${LIB_FILES})
