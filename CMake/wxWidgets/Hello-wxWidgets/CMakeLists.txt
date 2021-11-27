@@ -54,7 +54,7 @@ set(CMAKE_DEBUG_LINKER_FLAGS "${CMAKE_DEBUG_LINKER_FLAGS} -g")
 set(CMAKE_EXE_LINKER_FLAGS_INIT -m32)
 
 if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
-    # if set WIN32 or WIN64 -> disabled console log -> std::out not working
+    # if set WIN32 -> disabled console log -> std::out not working
     add_executable(${CMAKE_PROJECT_NAME} WIN32 ${SOURCE_FILES})
 else()
     add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
